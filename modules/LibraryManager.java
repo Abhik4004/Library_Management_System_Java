@@ -8,6 +8,14 @@ public class LibraryManager {
   Vector<Transaction> HistoricalDate = new Vector<>();
   Vector<Transaction> Current = new Vector<>();
 
+  /**
+   * Issues a book to the student
+   * 
+   * @param bookList
+   * @param studentList
+   * @param studentID
+   * @param bookName
+   */
   public void bookIssue(Vector<Book> bookList, Vector<Student> studentList, Integer studentID, String bookName) {
     LocalDate today = LocalDate.now();
     Student student = findStudentByID(studentID, studentList);
@@ -36,6 +44,15 @@ public class LibraryManager {
     System.out.println("Book is issued");
     System.out.println(made);
   }
+
+  /**
+   * return the books by the student
+   * 
+   * @param bookList
+   * @param studentList
+   * @param studentID
+   * @param bookName
+   */
 
   public void returnBook(Vector<Book> bookList, Vector<Student> studentList, Integer studentID, String bookName) {
     LocalDate today = LocalDate.now();
@@ -74,6 +91,14 @@ public class LibraryManager {
     System.out.println("No matching transaction found for return.");
   }
 
+  /**
+   * Finds the student
+   * 
+   * @param studentID
+   * @param studentList
+   * @return student if matches the id
+   */
+
   private Student findStudentByID(Integer studentID, Vector<Student> studentList) {
     for (Student student : studentList) {
       if (student.getStudentID().equals(studentID)) {
@@ -82,6 +107,14 @@ public class LibraryManager {
     }
     return null;
   }
+
+  /**
+   * Finds the book
+   * 
+   * @param bookName
+   * @param bookList
+   * @return books
+   */
 
   private Book findBookByName(String bookName, Vector<Book> bookList) {
     for (Book book : bookList) {
@@ -92,6 +125,14 @@ public class LibraryManager {
     return null;
   }
 
+  /**
+   * Transaction details of Student
+   * 
+   * @param student
+   * @param book
+   * @return transaction details
+   */
+
   private Transaction getTransactionBook(Student student, Book book) {
     for (Transaction transaction : student.transactions) {
       if (transaction.getBook().equals(book)) {
@@ -101,6 +142,14 @@ public class LibraryManager {
     return null;
   }
 
+  /**
+   * Transaction details of Faculty
+   * 
+   * @param faculty
+   * @param book
+   * @return transaction of faculty
+   */
+
   private Transaction getTransactionFaculty(Faculty faculty, Book book) {
     for (Transaction transaction : faculty.transactions) {
       if (transaction.getBook().equals(book)) {
@@ -109,6 +158,15 @@ public class LibraryManager {
     }
     return null;
   }
+
+  /**
+   * Issues the journal
+   * 
+   * @param journalList
+   * @param facultyList
+   * @param facultyID
+   * @param journalName
+   */
 
   public void journalIssue(Vector<Journal> journalList, Vector<Faculty> facultyList, Integer facultyID,
       String journalName) {
@@ -139,6 +197,15 @@ public class LibraryManager {
     System.out.println("Journal is issued");
     System.out.println(made);
   }
+
+  /**
+   * Returns Journal
+   * 
+   * @param journalList
+   * @param facultyList
+   * @param facultyID
+   * @param journalName
+   */
 
   public void returnJournal(Vector<Journal> journalList, Vector<Faculty> facultyList, Integer facultyID,
       String journalName) {
@@ -178,6 +245,14 @@ public class LibraryManager {
     System.out.println("No matching transaction found for return.");
   }
 
+  /**
+   * Finds faculty member
+   * 
+   * @param facultyID
+   * @param facultyList
+   * @return returns faculty member object
+   */
+
   private Faculty findFacultyByID(Integer facultyID, Vector<Faculty> facultyList) {
     for (Faculty faculty : facultyList) {
       if (faculty.getFacultyID().equals(facultyID)) {
@@ -186,6 +261,14 @@ public class LibraryManager {
     }
     return null;
   }
+
+  /**
+   * Finds journal
+   * 
+   * @param journalName
+   * @param journalList
+   * @return journal object
+   */
 
   private Journal findJournalByName(String journalName, Vector<Journal> journalList) {
     for (Journal journal : journalList) {
@@ -196,6 +279,13 @@ public class LibraryManager {
     return null;
   }
 
+  /**
+   * Searches Transaction details
+   * 
+   * @param faculty
+   * @param journal
+   * @return transaction object
+   */
   private Transaction getTransaction(Faculty faculty, Journal journal) {
     for (Transaction transaction : faculty.transactions) {
       if (transaction.getJournal().equals(journal)) {
@@ -204,6 +294,15 @@ public class LibraryManager {
     }
     return null;
   }
+
+  /**
+   * Issues book to faculty
+   * 
+   * @param bookList
+   * @param facultyList
+   * @param facultyID
+   * @param bookName
+   */
 
   public void bookFacultyIssue(Vector<Book> bookList, Vector<Faculty> facultyList, Integer facultyID, String bookName) {
     LocalDate today = LocalDate.now();
@@ -233,6 +332,15 @@ public class LibraryManager {
     System.out.println("Book is issued");
     System.out.println(made);
   }
+
+  /**
+   * Returns book from the faculty
+   * 
+   * @param bookList
+   * @param facultyList
+   * @param facultyID
+   * @param bookName
+   */
 
   public void returnFacultyBook(Vector<Book> bookList, Vector<Faculty> facultyList, Integer facultyID,
       String bookName) {
