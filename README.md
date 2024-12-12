@@ -40,7 +40,7 @@ Represents a transaction (issue or return) in the library.
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/Library_Management_System_Java.git
+    git clone https://github.com/Abhik4004/Library_Management_System_Java.git
     ```
 
 2. Compile the Java files:
