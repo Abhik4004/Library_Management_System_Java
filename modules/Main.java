@@ -14,6 +14,7 @@ public class Main {
     bookList.add(new Book("Clean Code", "Robert C. Martin", "01-08-2008"));
     bookList.add(new Book("Design Patterns", "Erich Gamma", "21-10-1994"));
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     Vector<Journal> journalList = new Vector<>();
     journalList.add(new Journal("Journal of Computer Science", "Alice Johnson", "01-01-2021"));
     journalList.add(new Journal("Journal of AI Research", "Bob Brown", "15-03-2020"));
@@ -23,21 +24,28 @@ public class Main {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Vector<Student> studentList = new Vector<>();
-    studentList.add(new Student("test", "IT", 34));
-    studentList.add(new Student("Alice", "Computer Science", 101));
-    studentList.add(new Student("Bob", "Electrical Engineering", 102));
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    studentList.add(new Student("John Doe", "Information Technology", 35));
+    studentList.add(new Student("Alice Smith", "Computer Science", 101));
+    studentList.add(new Student("Bob Johnson", "Electrical Engineering", 102));
+    studentList.add(new Student("Charlie Brown", "Mechanical Engineering", 103));
+    studentList.add(new Student("Diana Prince", "Civil Engineering", 104));
+    studentList.add(new Student("Eve Adams", "Biotechnology", 105));
 
-    admin.bookIssue(bookList, studentList, 34, "test");
-    System.out.println("///////////");
-    printList(bookList, studentList);
-    System.out.println("///////////");
-    admin.returnBook(bookList, studentList, 34, "test");
-    System.out.println("///////////");
-    printList(bookList, studentList);
-    System.out.println("///////////");
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    Vector<Faculty> facultyList = new Vector<>();
+    facultyList.add(new Faculty("Jamson", "Information Technology", 110));
+    facultyList.add(new Faculty("Alice", "Computer Science", 111));
+    facultyList.add(new Faculty("Robert", "Mechanical Engineering", 112));
+    facultyList.add(new Faculty("Emily", "Civil Engineering", 113));
+    facultyList.add(new Faculty("Daniel", "Electrical Engineering", 114));
 
   }
+
+  /**
+   * Add students to the student list vector
+   * 
+   * @param studentList
+   */
 
   public static void addStudent(Vector<Student> studentList) {
     Scanner sc = new Scanner(System.in);
@@ -54,6 +62,12 @@ public class Main {
     System.out.println(student);
   }
 
+  /**
+   * add book to the book list vector
+   * 
+   * @param bookList
+   */
+
   public static void addBook(Vector<Book> bookList) {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter student detials: ");
@@ -68,7 +82,17 @@ public class Main {
     System.out.println(book);
   }
 
-  public static void printList(Vector<Book> bookList, Vector<Student> studentList) {
+  /**
+   * Prints out the list
+   * 
+   * @param bookList
+   * @param studentList
+   * @param facultyList
+   * @param journalList
+   */
+
+  public static void printList(Vector<Book> bookList, Vector<Student> studentList, Vector<Journal> journalList,
+      Vector<Faculty> facultyList) {
     System.out.println("Books:");
     for (Book book : bookList) {
       System.out.println(book);
@@ -79,5 +103,14 @@ public class Main {
       System.out.println(student);
     }
 
+    System.out.println("\nTeachers:");
+    for (Faculty faculty : facultyList) {
+      System.out.println(faculty);
+    }
+
+    System.out.println("\nJournals:");
+    for (Journal journal : journalList) {
+      System.out.println(journal);
+    }
   }
 }
