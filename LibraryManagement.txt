@@ -1,0 +1,139 @@
+Sure! Let's break down the design of the library management system into the necessary classes and their attributes and methods. Here’s a structured approach:
+
+### 1. **Class: Library**
+This class will manage the overall library operations, including books, journals, and transactions.
+
+**Attributes**:
+- `books`: List of Book objects.
+- `journals`: List of Journal objects.
+- `members`: List of Member objects.
+- `transactions`: List of Transaction objects.
+
+**Methods**:
+- `addBook(Book book)`: Add a new book to the library.
+- `addJournal(Journal journal)`: Add a new journal to the library.
+- `addMember(Member member)`: Register a new member.
+- `issueItem(Member member, Item item)`: Issue a book or journal to a member.
+- `returnItem(Member member, Item item)`: Return a book or journal.
+- `recordTransaction(Transaction transaction)`: Record a transaction in the register.
+
+### 2. **Class: Item (Abstract)**
+This abstract class will serve as a base class for Book and Journal.
+
+**Attributes**:
+- `title`: Title of the item.
+- `author`: Author of the item.
+- `publicationDate`: Date of publication.
+
+**Methods**:
+- `getDetails()`: Get details of the item.
+
+### 3. **Class: Book (Inherits from Item)**
+This class represents a book in the library.
+
+**Attributes**:
+- `isbn`: ISBN number of the book.
+
+**Methods**:
+- `getDetails()`: Get details of the book.
+
+### 4. **Class: Journal (Inherits from Item)**
+This class represents a journal in the library.
+
+**Attributes**:
+- `issueNumber`: Issue number of the journal.
+- `volumeNumber`: Volume number of the journal.
+
+**Methods**:
+- `getDetails()`: Get details of the journal.
+
+### 5. **Class: Member (Abstract)**
+This abstract class will serve as a base class for Student and Faculty.
+
+**Attributes**:
+- `name`: Name of the member.
+- `memberID`: Unique ID of the member.
+- `issuedItems`: List of items issued to the member.
+
+**Methods**:
+- `issueItem(Item item)`: Issue an item to the member.
+- `returnItem(Item item)`: Return an item.
+- `getDetails()`: Get details of the member.
+
+### 6. **Class: Student (Inherits from Member)**
+This class represents a student member.
+
+**Attributes**:
+- `maxBooksAllowed`: Maximum number of books a student can issue (2).
+- `lateFeePerDay`: Late fee per day for students (Rs. 1).
+
+**Methods**:
+- `issueItem(Item item)`: Override to enforce the limit on the number of books.
+- `returnItem(Item item)`: Override to calculate late fees if applicable.
+
+### 7. **Class: Faculty (Inherits from Member)**
+This class represents a faculty member.
+
+**Attributes**:
+- `maxBooksAllowed`: Maximum number of books a faculty member can issue (10).
+
+**Methods**:
+- `issueItem(Item item)`: Override to enforce the limit on the number of books.
+- `returnItem(Item item)`: Override to exempt from late fees.
+
+### 8. **Class: Transaction**
+This class represents a transaction in the library.
+
+**Attributes**:
+- `transactionID`: Unique ID of the transaction.
+- `member`: Member involved in the transaction.
+- `item`: Item involved in the transaction.
+- `transactionType`: Type of transaction (issue/return).
+- `date`: Date of the transaction.
+
+**Methods**:
+- `getDetails()`: Get details of the transaction.
+
+Class: Librarian
+Attributes:
+
+name: Name of the librarian.
+
+employeeID: Unique ID of the librarian.
+
+library: Reference to the Library object.
+
+Methods:
+
+addBook(Book book): Add a new book to the library.
+
+addJournal(Journal journal): Add a new journal to the library.
+
+addMember(Member member): Register a new member.
+
+issueItem(Member member, Item item): Issue a book or journal to a member.
+
+returnItem(Member member, Item item): Return a book or journal.
+
+recordTransaction(Transaction transaction): Record a transaction in the register.
+
+getDetails(): Get details of the librarian.
+
+Integration with Existing Classes
+Library Class:
+
+The Library class will now have a reference to the Librarian object.
+
+The methods for adding books, journals, members, issuing items, returning items, and recording transactions will be delegated to the Librarian class.
+
+Item, Book, and Journal Classes:
+
+No changes needed. These classes will remain as they are.
+
+Member, Student, and Faculty Classes:
+
+No changes needed. These classes will remain as they are.
+
+Transaction Class:
+
+No changes needed. This class will remain as it is.
