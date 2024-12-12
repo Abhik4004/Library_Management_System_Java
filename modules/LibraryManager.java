@@ -244,14 +244,16 @@ public class LibraryManager {
     Iterator<Transaction> iterator = Current.iterator();
     while (iterator.hasNext()) {
       Transaction currentTransaction = iterator.next();
+
       if (currentTransaction.getTransactionsID().equals(transaction.getTransactionsID())) {
         iterator.remove();
-        if (transaction.getReturnDate().equals(today) || transaction.getReturnDate().isBefore(today)) {
+        if (transaction.getReturnDate().isBefore(today) || transaction.getReturnDate().equals(today)) {
           System.out.println("Returned in before " + (transaction.getReturnDate().toEpochDay() - today.toEpochDay()));
-        } else if (transaction.getReturnDate().isAfter(today)) {
+        } else if (today.isAfter(transaction.getReturnDate())) {
           long overDue = today.toEpochDay() - transaction.getReturnDate().toEpochDay();
           System.out.println("You are " + overDue + " days late");
         }
+
         faculty.journalsIssued.remove(journal);
         faculty.MAX_BOOK_ALLOWED = faculty.MAX_BOOK_ALLOWED + 1;
         journal.isIssued = false;
