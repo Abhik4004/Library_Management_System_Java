@@ -75,11 +75,28 @@ public class LibraryManager {
       Transaction currentTransaction = iterator.next();
       if (currentTransaction.getTransactionsID().equals(transaction.getTransactionsID())) {
         iterator.remove();
-        if (transaction.getReturnDate().equals(today)) {
-          System.out.println("Returned in time");
-        } else {
-          System.out.println("Pay the fine");
+
+        LocalDate returnDate = transaction.getReturnDate();
+
+        if (returnDate.isBefore(today) || returnDate.equals(today)) {
+          System.out.println(returnDate.isBefore(today));
+          long overdueDays = today.toEpochDay() - returnDate.toEpochDay();
+          if (overdueDays > 0) {
+            System.out.println("Returned before due date. No fine required.");
+            System.out.println("Days returned early: " + overdueDays);
+          } else {
+            System.out.println("Returned on time. No fine required.");
+          }
         }
+
+        // If returned after due date
+        else if (today.isAfter(returnDate)) {
+          long overdueDays = today.toEpochDay() - returnDate.toEpochDay();
+          long finePerDay = 20;
+          long totalFine = finePerDay * overdueDays;
+          System.out.println("Returned after due date. Fine: " + totalFine + " rs");
+        }
+
         student.booksIssued.remove(book);
         student.MAX_BOOK_ALLOWED = student.MAX_BOOK_ALLOWED + 1;
         book.isIssued = false;
@@ -229,10 +246,11 @@ public class LibraryManager {
       Transaction currentTransaction = iterator.next();
       if (currentTransaction.getTransactionsID().equals(transaction.getTransactionsID())) {
         iterator.remove();
-        if (transaction.getReturnDate().equals(today)) {
-          System.out.println("Returned in time");
-        } else {
-          System.out.println("Pay the fine");
+        if (transaction.getReturnDate().equals(today) || transaction.getReturnDate().isBefore(today)) {
+          System.out.println("Returned in before " + (transaction.getReturnDate().toEpochDay() - today.toEpochDay()));
+        } else if (transaction.getReturnDate().isAfter(today)) {
+          long overDue = today.toEpochDay() - transaction.getReturnDate().toEpochDay();
+          System.out.println("You are " + overDue + " days late");
         }
         faculty.journalsIssued.remove(journal);
         faculty.MAX_BOOK_ALLOWED = faculty.MAX_BOOK_ALLOWED + 1;

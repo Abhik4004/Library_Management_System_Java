@@ -11,7 +11,7 @@ public class Student extends Member {
   public Student(String name, String department, Integer studentId) {
     super(name, department);
     this.studentID = studentId;
-    System.out.println("Student Item is created: ");
+    // System.out.println("Student Item is created: ");
   }
 
   public Integer getStudentID() {

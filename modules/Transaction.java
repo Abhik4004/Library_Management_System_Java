@@ -10,7 +10,7 @@ public class Transaction {
   public Journal journal;
 
   public Transaction(String type, LocalDate today, LocalDate returnDate, Book book) {
-    this.transactionsID = new UUID(5, 5);
+    this.transactionsID = UUID.randomUUID(); // Generate a random, unique UUID
     this.type = type;
     this.today = today;
     this.returnDate = returnDate;
@@ -18,7 +18,7 @@ public class Transaction {
   }
 
   public Transaction(String type, LocalDate today, LocalDate returnDate, Journal journal) {
-    this.transactionsID = new UUID(5, 5);
+    this.transactionsID = UUID.randomUUID(); // Generate a random, unique UUID
     this.type = type;
     this.today = today;
     this.returnDate = returnDate;
@@ -51,6 +51,6 @@ public class Transaction {
 
   public String toString() {
     return "Transaction ID: " + transactionsID + ", Type: " + type + ", Date: " + today +
-        ", Return Date: " + returnDate + ", Book: " + book.getTitle();
+        ", Return Date: " + returnDate;
   }
 }

@@ -14,7 +14,7 @@ public class Faculty extends Member {
       Integer facultyID) {
     super(name, department);
     this.facultyID = facultyID;
-    System.out.println("Faculty Item is created: ");
+    // System.out.println("Faculty Item is created: ");
   }
 
   public Integer getFacultyID() {

@@ -5,6 +5,8 @@ public class Main {
   public static void main(String[] args) {
     Design.printArtSideBySide();
     LibraryManager admin = new LibraryManager();
+    boolean running = true;
+    Scanner sc = new Scanner(System.in);
 
     Vector<Book> bookList = new Vector<>();
     bookList.add(new Book("test", "test", "20-24-12"));
@@ -39,6 +41,107 @@ public class Main {
     facultyList.add(new Faculty("Emily", "Civil Engineering", 113));
     facultyList.add(new Faculty("Daniel", "Electrical Engineering", 114));
 
+    // admin.bookIssue(bookList, studentList, 35, "test");
+
+    while (running) {
+      Design.getMenu();
+      System.out.println("Menu:");
+      System.out.println("1. Add Student");
+      System.out.println("2. Add Book");
+      System.out.println("3. Add Journal");
+      System.out.println("4. Add Faculty");
+      System.out.println("5. Issue Book (Student || Teacher)");
+      System.out.println("6. Return Book (Student || Teacher)");
+      System.out.println("7. Issue Journal");
+      System.out.println("8. Return Journal");
+      System.out.println("9. Exit");
+      System.out.println("10. Health Check");
+      System.out.print("Enter your choice: ");
+
+      int choice = sc.nextInt();
+
+      switch (choice) {
+        case 1:
+          addStudent(studentList);
+          break;
+        case 2:
+          addBook(bookList);
+          break;
+        case 3:
+          addJounral(journalList);
+          break;
+        case 4:
+          addFaculty(facultyList);
+          break;
+        case 5:
+          System.out.println("Enter S for Student T for Teacher: ");
+          String memeberchoice = sc.next().toLowerCase();
+          if (memeberchoice.equals("t")) {
+            System.out.println("Enter Faculty ID: ");
+            Integer id = sc.nextInt();
+            sc.nextLine(); // Specifically, when you use sc.nextInt(), it reads the integer input, but when
+                           // you call sc.nextLine() immediately afterward, it consumes the remaining
+                           // newline character from the previous input, causing sc.nextLine() to read an
+                           // empty line instead of the book name.
+            System.out.println("Enter Book Name: ");
+            String bookName = sc.nextLine();
+            admin.bookFacultyIssue(bookList, facultyList, id, bookName);
+          } else if (memeberchoice.equals("s")) {
+            System.out.println("Enter Student ID: ");
+            Integer id = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter Book Name: ");
+            String bookName = sc.nextLine();
+            admin.bookIssue(bookList, studentList, id, bookName);
+          }
+          break;
+        case 6:
+          System.out.println("Enter S for Student T for Teacher: ");
+          String heirarchychoice = sc.next().toLowerCase();
+          if (heirarchychoice.equals("t")) {
+            System.out.println("Enter Faculty ID: ");
+            Integer id = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter Book Name: ");
+            String bookName = sc.nextLine();
+            admin.returnFacultyBook(bookList, facultyList, id, bookName);
+          } else if (heirarchychoice.equals("s")) {
+            System.out.println("Enter Student ID: ");
+            Integer id = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Enter Book Name: ");
+            String bookName = sc.nextLine();
+            admin.returnBook(bookList, studentList, id, bookName);
+          }
+          break;
+        case 7:
+          System.out.println("Enter Faculty ID: ");
+          Integer id = sc.nextInt();
+          sc.nextLine();
+          System.out.println("Enter journal Name: ");
+          String journalName = sc.nextLine();
+          admin.journalIssue(journalList, facultyList, id, journalName);
+          break;
+        case 8:
+          System.out.println("Enter Faculty ID: ");
+          Integer identificationNumber = sc.nextInt();
+          sc.nextLine();
+          System.out.println("Enter journal Name: ");
+          String journal = sc.nextLine();
+          admin.returnJournal(journalList, facultyList, identificationNumber, journal);
+          break;
+        case 9:
+          System.out.println("Exiting....");
+          running = false;
+          break;
+        case 10:
+          System.out.println("Health Check");
+          printList(bookList, studentList, journalList, facultyList);
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   /**
@@ -51,15 +154,34 @@ public class Main {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter student detials: ");
     System.out.println("Name: ");
-    String name = sc.nextLine();
+    String name = sc.next();
     System.out.println("Dept: ");
-    String dept = sc.nextLine();
+    String dept = sc.next();
     System.out.println("Roll No: ");
     Integer id = sc.nextInt();
     Student student = new Student(name, dept, id);
-    System.out.println(student);
     studentList.add(student);
     System.out.println(student);
+  }
+
+  /**
+   * adding memeber tot the faculty list
+   * 
+   * @param facultyList
+   */
+
+  public static void addFaculty(Vector<Faculty> facultyList) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter Faculty detials: ");
+    System.out.println("Name: ");
+    String name = sc.next();
+    System.out.println("Dept: ");
+    String dept = sc.next();
+    System.out.println("Faculty ID: ");
+    Integer id = sc.nextInt();
+    Faculty faculty = new Faculty(name, dept, id);
+    facultyList.add(faculty);
+    System.out.println(faculty);
   }
 
   /**
@@ -70,16 +192,36 @@ public class Main {
 
   public static void addBook(Vector<Book> bookList) {
     Scanner sc = new Scanner(System.in);
-    System.out.println("Enter student detials: ");
+    System.out.println("Enter Book detials: ");
     System.out.println("Author: ");
-    String author = sc.nextLine();
+    String author = sc.next();
     System.out.println("Title: ");
-    String title = sc.nextLine();
+    String title = sc.next();
     System.out.println("Publication date: ");
-    String date = sc.nextLine();
+    String date = sc.next();
     Book book = new Book(title, author, date);
     bookList.add(book);
     System.out.println(book);
+  }
+
+  /**
+   * Adds journal to the list
+   * 
+   * @param journalList
+   */
+
+  public static void addJounral(Vector<Journal> journalList) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter Journal detials: ");
+    System.out.println("Author: ");
+    String author = sc.next();
+    System.out.println("Title: ");
+    String title = sc.next();
+    System.out.println("Publication date: ");
+    String date = sc.next();
+    Journal journal = new Journal(title, author, date);
+    journalList.add(journal);
+    System.out.println(journal);
   }
 
   /**

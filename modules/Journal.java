@@ -8,7 +8,7 @@ public class Journal extends Item {
   public Journal(String name, String author, String date) {
     super(name, author, date);
     this.id = nextId++;
-    System.out.println("Journal item is created: ");
+    // System.out.println("Journal item is created: ");
   }
 
   public Integer getJournalId() {

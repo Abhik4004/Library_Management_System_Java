@@ -8,7 +8,7 @@ public class Book extends Item {
   public Book(String name, String author, String date) {
     super(name, author, date);
     this.id = nextId++;
-    System.out.println("Book item is created: ");
+    // System.out.println("Book item is created: ");
   }
 
   public Integer getBookId() {
